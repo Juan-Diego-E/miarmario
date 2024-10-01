@@ -2,28 +2,28 @@ const express = require('express');
 const router = express.Router();
 
 // Obtener todos los usuarios
-router.get('/', (req, res) => {
-    res.send('Obtener todos los usuarios');
+router.get('/users', (req, res) => {
+    res.send('Get all users');
 });
 
 // Crear un nuevo usuario
-router.post('/', (req, res) => {
-    res.send('Crear un nuevo usuario');
+router.post('/user', (req, res) => {
+    res.send('Create a new user');
 });
 
 // Obtener un usuario por ID
-router.get('/:id', (req, res) => {
-    res.send(`Obtener usuario con ID ${req.params.id}`);
+router.get('/users/:id', (req, res) => {
+    res.send(`Get user with ID ${req.params.id}`);
 });
 
 // Actualizar un usuario por ID
-router.put('/:id', (req, res) => {
-    res.send(`Actualizar usuario con ID ${req.params.id}`);
+router.put('/user/:id', (req, res) => {
+    res.send(`Update user with ID ${req.params.id}`);
 });
 
 // Eliminar un usuario por ID
-router.delete('/:id', (req, res) => {
-    res.send(`Eliminar usuario con ID ${req.params.id}`);
+router.delete('/user/:id', (req, res) => {
+    res.send(`Delete user with ID ${req.params.id}`);
 });
 
 module.exports = router;

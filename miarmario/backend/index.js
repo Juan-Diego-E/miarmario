@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 // Importar rutas
 const userRoutes = require('./routes/userRoutes');
-const itemRoutes = require('./routes/itemRoutes');
+const itemRoutes = require('./routes/items');  // Cambiado "itemRoutes" a "items"
 
 dotenv.config();
 
@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Rutas
 app.use('/users', userRoutes);
-app.use('/items', itemRoutes);
+app.use('/items', itemRoutes);  // Asegúrate de usar el nombre correcto
 
 // Ruta de prueba
 app.get('/', (req, res) => {
