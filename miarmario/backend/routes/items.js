@@ -46,7 +46,7 @@ router.put('/items/:id', async (req, res) => {
 });
 
 // Eliminar un artículo
-router.delete('item/:id', async (req, res) => {
+router.delete('/items/:id', async (req, res) => {
     try {
         const item = await Item.findByIdAndDelete(req.params.id);
         if (!item) return res.status(404).json({ message: 'Item not found' });
