@@ -14,15 +14,32 @@ router.post('/item', async (req, res) => {
     }
 });
 
-// Obtener todos los artículos
+// Obtener artículos con filtros
 router.get('/items', async (req, res) => {
+    const { name, color, category, type, size, material } = req.query;
+
+    const filter = {};
+    
+    if (name) {
+        filter.$or = [
+            { name: new RegExp(name, 'i') },
+            { description: new RegExp(name, 'i') }
+        ];
+    }
+    if (color) filter.color = color;
+    if (category) filter.category = category;
+    if (type) filter.type = type;
+    if (size) filter.size = size;
+    if (material) filter.material = material;
+
     try {
-        const items = await Item.find().populate('createdBy');
+        const items = await Item.find(filter).populate('createdBy');
         res.json(items);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
+
 
 // Obtener un artículo por ID
 router.get('/items/:id', async (req, res) => {
