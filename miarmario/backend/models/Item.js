@@ -5,21 +5,21 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: String, // Cambiado "descripcion" a "description"
+    description: String,
     category: {
-        type: String,  // "ropa", "calzado", "alhaja", etc.
+        type: String,
         required: true
     },
-    size: String,  // Agregado tamaño/talle
+    size: String,
     color: String,
-    image: String,  // Cambiado "imagen" a "image"
+    image: String,
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',  // Cambiado "Usuario" a "User"
+        ref: 'User',
         required: true
     },
     createdWhen: {
-        type: Date,  // Cambiado a lowerCamelCase
+        type: Date,
         default: Date.now
     }
 });
