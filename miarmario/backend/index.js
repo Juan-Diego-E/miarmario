@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 // Importar rutas
 const userRoutes = require('./routes/users');
 const itemRoutes = require('./routes/items');
+const folderRoutes = require('./routes/folders');
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 // Rutas
 app.use('/users', userRoutes);
 app.use('/items', itemRoutes);
+app.use('/folders', folderRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
