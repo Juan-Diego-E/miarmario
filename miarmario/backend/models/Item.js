@@ -21,6 +21,11 @@ const itemSchema = new mongoose.Schema({
     createdWhen: {
         type: Date,
         default: Date.now
+    },
+    folderId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Folder', // Referencia a la carpeta o subcarpeta
+        required: true
     }
 });
 
