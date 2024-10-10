@@ -24,7 +24,7 @@ const itemSchema = new mongoose.Schema({
     },
     folderId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Folder', // Referencia a la carpeta o subcarpeta
+        ref: 'Folder',
         required: true
     }
 });
