@@ -26,7 +26,15 @@ const itemSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Folder',
         required: true
-    }
+    },
+    orderIndex: { 
+        type: Number, 
+        default: 0 
+    },
+    tags: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Tag' 
+    }]
 });
 
 module.exports = mongoose.model('Item', itemSchema);
