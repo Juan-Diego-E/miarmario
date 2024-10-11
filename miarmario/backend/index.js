@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/users');
 const itemRoutes = require('./routes/items');
 const folderRoutes = require('./routes/folders');
+const tagRoutes = require('./routes/tags');
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/items', itemRoutes);
 app.use('/folders', folderRoutes);
+app.use('/tags', tagRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
