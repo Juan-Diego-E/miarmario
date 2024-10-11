@@ -14,12 +14,14 @@ router.post('/item', async (req, res) => {
     }
 });
 
-// Obtener artículos con filtros
+// Obtener artículos ordenados dentro de una carpeta
 router.get('/items', async (req, res) => {
-    const { name, color, category, type, size, material } = req.query;
+    const { name, color, category, type, size, material, folderId, sortBy } = req.query;
 
     const filter = {};
-    
+    let sortOption = {};
+
+    // Filtrar por los criterios anteriores
     if (name) {
         filter.$or = [
             { name: new RegExp(name, 'i') },
@@ -31,15 +33,22 @@ router.get('/items', async (req, res) => {
     if (type) filter.type = type;
     if (size) filter.size = size;
     if (material) filter.material = material;
+    if (folderId) filter.folderId = folderId;
+
+    // Ordenar artículos por nombre (A-Z o Z-A)
+    if (sortBy === 'nameAsc') {
+        sortOption.name = 1;  // A-Z
+    } else if (sortBy === 'nameDesc') {
+        sortOption.name = -1;  // Z-A
+    }
 
     try {
-        const items = await Item.find(filter).populate('createdBy');
+        const items = await Item.find(filter).sort(sortOption).populate('createdBy');
         res.json(items);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
-
 
 // Obtener un artículo por ID
 router.get('/items/:id', async (req, res) => {
@@ -71,6 +80,17 @@ router.delete('/items/:id', async (req, res) => {
         res.json({ message: 'Item deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+});
+
+// Logica para ordenación de elementos
+router.put('/items/:id/reorder', async (req, res) => {
+    const { orderIndex } = req.body;
+    try {
+        const updatedItem = await Item.findByIdAndUpdate(req.params.id, { orderIndex }, { new: true });
+        res.json(updatedItem);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 });
 
