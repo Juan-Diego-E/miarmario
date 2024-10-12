@@ -8,7 +8,7 @@ const tagSchema = new mongoose.Schema({
     },
     color: {
         type: String,
-        default: '#FFFFFF'  // Color por defecto (blanco)
+        default: '#FFFFFF'
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,

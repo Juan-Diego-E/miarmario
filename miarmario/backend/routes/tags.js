@@ -3,10 +3,23 @@ const router = express.Router();
 const Tag = require('../models/Tag');
 const Item = require('../models/Item');
 
-// Crear una nueva etiqueta
-router.post('/tag', async (req, res) => {
+// Crear una nueva etiqueta con límite en el plan gratuito
+router.post('/tags', async (req, res) => {
     const { name, color, createdBy } = req.body;
     try {
+        if (!name || !createdBy) {
+            return res.status(400).json({ message: 'Nombre y creador son obligatorios.' });
+        }
+
+        const existingTagsCount = await Tag.countDocuments({ createdBy });
+
+        const maxTags = 5;
+        if (existingTagsCount >= maxTags) {
+            return res.status(403).json({
+                message: 'Has alcanzado el límite de 5 etiquetas en el plan gratuito. Mejora tu plan para añadir más etiquetas.'
+            });
+        }
+
         const newTag = new Tag({ name, color, createdBy });
         await newTag.save();
         res.status(201).json(newTag);
@@ -16,7 +29,7 @@ router.post('/tag', async (req, res) => {
 });
 
 // Obtener todas las etiquetas de un usuario
-router.get('tags/:userId', async (req, res) => {
+router.get('/tags/:userId', async (req, res) => {
     try {
         const tags = await Tag.find({ createdBy: req.params.userId });
         res.json(tags);
@@ -25,15 +38,29 @@ router.get('tags/:userId', async (req, res) => {
     }
 });
 
-// Asignar etiquetas a un artículo
-router.put('/assign', async (req, res) => {
+router.put('/tags/assign', async (req, res) => {
     const { itemId, tags } = req.body;
     try {
+        // Validación básica
+        if (!itemId || !tags || !Array.isArray(tags)) {
+            return res.status(400).json({ message: 'ID del artículo y lista de etiquetas son obligatorios.' });
+        }
+
+        // Limitar el número de etiquetas a 10, por ejemplo
+        if (tags.length > 5) {
+            return res.status(400).json({ message: 'El artículo no puede tener más de 5 etiquetas.' });
+        }
+
         const updatedItem = await Item.findByIdAndUpdate(
             itemId,
             { $set: { tags } },  // Reemplaza todas las etiquetas del artículo
             { new: true }
-        );
+        ).populate('tags');
+        
+        if (!updatedItem) {
+            return res.status(404).json({ message: 'Artículo no encontrado' });
+        }
+        
         res.json(updatedItem);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -41,7 +68,7 @@ router.put('/assign', async (req, res) => {
 });
 
 // Eliminar una etiqueta
-router.delete('tags/:tagId', async (req, res) => {
+router.delete('/tags/:tagId', async (req, res) => {
     try {
         const deletedTag = await Tag.findByIdAndDelete(req.params.tagId);
         if (!deletedTag) return res.status(404).json({ message: 'Etiqueta no encontrada' });
