@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     birthday: {
         type: Date,
-        required: true
+        required: [true, 'La fecha de nacimiento es requerida']
     },
     createdAt: {
         type: Date,
