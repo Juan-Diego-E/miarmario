@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const Item = require('../models/Item');
 const User = require('../models/User');
 
@@ -15,7 +16,7 @@ router.post('/item', async (req, res) => {
 });
 
 // Obtener artículos ordenados dentro de una carpeta
-router.get('/items', async (req, res) => {
+router.get('/items', auth, async (req, res) => {
     const { name, color, category, type, size, material, folderId, sortBy } = req.query;
 
     const filter = {};
