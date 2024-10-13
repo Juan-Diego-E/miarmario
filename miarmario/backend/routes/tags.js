@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const Tag = require('../models/Tag');
 const Item = require('../models/Item');
 
 // Crear una nueva etiqueta con límite en el plan gratuito
-router.post('/tags', async (req, res) => {
+router.post('/tags', auth, async (req, res) => {
     const { name, color, createdBy } = req.body;
     try {
         if (!name || !createdBy) {
@@ -29,7 +30,7 @@ router.post('/tags', async (req, res) => {
 });
 
 // Obtener todas las etiquetas de un usuario
-router.get('/tags/:userId', async (req, res) => {
+router.get('/tags/:userId', auth, async (req, res) => {
     try {
         const tags = await Tag.find({ createdBy: req.params.userId });
         res.json(tags);
@@ -38,7 +39,7 @@ router.get('/tags/:userId', async (req, res) => {
     }
 });
 
-router.put('/tags/assign', async (req, res) => {
+router.put('/tags/assign', auth, async (req, res) => {
     const { itemId, tags } = req.body;
     try {
         // Validación básica
@@ -68,7 +69,7 @@ router.put('/tags/assign', async (req, res) => {
 });
 
 // Eliminar una etiqueta
-router.delete('/tags/:tagId', async (req, res) => {
+router.delete('/tags/:tagId', auth, async (req, res) => {
     try {
         const deletedTag = await Tag.findByIdAndDelete(req.params.tagId);
         if (!deletedTag) return res.status(404).json({ message: 'Etiqueta no encontrada' });

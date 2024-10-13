@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 
 // Obtener todos los usuarios
-router.get('/users', async (req, res) => {
+router.get('/users', auth, async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);
@@ -27,7 +28,7 @@ router.get('/users', async (req, res) => {
 // });
 
 // Obtener un usuario por ID
-router.get('/users/:id', async (req, res) => {
+router.get('/users/:id', auth, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
@@ -38,7 +39,7 @@ router.get('/users/:id', async (req, res) => {
 });
 
 // Actualizar un usuario por ID
-router.put('/user/:id', async (req, res) => {
+router.put('/user/:id', auth, async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedUser) return res.status(404).json({ message: 'Usuario no encontrado' });
@@ -49,7 +50,7 @@ router.put('/user/:id', async (req, res) => {
 });
 
 // Eliminar un usuario por ID
-router.delete('/user/:id', async (req, res) => {
+router.delete('/user/:id', auth, async (req, res) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.id);
         if (!deletedUser) return res.status(404).json({ message: 'Usuario no encontrado' });
@@ -103,7 +104,6 @@ router.post('/signup', [
     }
 });
 
-
 // Ruta para el inicio de sesión de usuarios
 router.post('/login', [
     body('email').isEmail().withMessage('El email debe ser válido'),
@@ -140,6 +140,5 @@ router.post('/login', [
         res.status(500).send('Error en el servidor');
     }
 });
-
 
 module.exports = router;

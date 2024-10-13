@@ -5,7 +5,7 @@ const Item = require('../models/Item');
 const User = require('../models/User');
 
 // Crear nuevo artículo
-router.post('/item', async (req, res) => {
+router.post('/item', auth, async (req, res) => {
     try {
         const item = new Item(req.body);
         await item.save();
@@ -52,7 +52,7 @@ router.get('/items', auth, async (req, res) => {
 });
 
 // Obtener un artículo por ID
-router.get('/items/:id', async (req, res) => {
+router.get('/items/:id', auth, async (req, res) => {
     try {
         const item = await Item.findById(req.params.id).populate('createdBy');
         if (!item) return res.status(404).json({ message: 'Item not found' });
@@ -63,7 +63,7 @@ router.get('/items/:id', async (req, res) => {
 });
 
 // Actualizar un artículo
-router.put('/items/:id', async (req, res) => {
+router.put('/items/:id', auth, async (req, res) => {
     try {
         const item = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!item) return res.status(404).json({ message: 'Item not found' });
@@ -74,7 +74,7 @@ router.put('/items/:id', async (req, res) => {
 });
 
 // Eliminar un artículo
-router.delete('/items/:id', async (req, res) => {
+router.delete('/items/:id', auth, async (req, res) => {
     try {
         const item = await Item.findByIdAndDelete(req.params.id);
         if (!item) return res.status(404).json({ message: 'Item not found' });
@@ -85,7 +85,7 @@ router.delete('/items/:id', async (req, res) => {
 });
 
 // Logica para ordenación de elementos
-router.put('/items/:id/reorder', async (req, res) => {
+router.put('/items/:id/reorder', auth, async (req, res) => {
     const { orderIndex } = req.body;
     try {
         const updatedItem = await Item.findByIdAndUpdate(req.params.id, { orderIndex }, { new: true });

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const Folder = require('../models/Folder');
 const Item = require('../models/Item');
 const User = require('../models/User');
 
 // Crear una nueva carpeta
-router.post('/folders', async (req, res) => {
+router.post('/folders', auth, async (req, res) => {
     const { name, parent, owner } = req.body;
     try {
         const newFolder = new Folder({ name, parent, owner });
@@ -17,7 +18,7 @@ router.post('/folders', async (req, res) => {
 });
 
 // Obtener todas las carpetas de un usuario (nivel 1)
-router.get('/folders/:userId', async (req, res) => {
+router.get('/folders/:userId', auth, async (req, res) => {
     try {
         const folders = await Folder.find({ owner: req.params.userId, parent: null });
         res.json(folders);
@@ -27,7 +28,7 @@ router.get('/folders/:userId', async (req, res) => {
 });
 
 // Obtener subcarpetas dentro de una carpeta específica
-router.get('/folders/:folderId/subfolders', async (req, res) => {
+router.get('/folders/:folderId/subfolders', auth, async (req, res) => {
     try {
         const subfolders = await Folder.find({ parent: req.params.folderId });
         res.json(subfolders);
@@ -37,7 +38,7 @@ router.get('/folders/:folderId/subfolders', async (req, res) => {
 });
 
 // Actualizar una carpeta
-router.put('/folders/:id', async (req, res) => {
+router.put('/folders/:id', auth, async (req, res) => {
     try {
         const updatedFolder = await Folder.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json(updatedFolder);
@@ -47,7 +48,7 @@ router.put('/folders/:id', async (req, res) => {
 });
 
 // Eliminar una carpeta
-router.delete('/folders/:id', async (req, res) => {
+router.delete('/folders/:id', auth, async (req, res) => {
     try {
         const deletedFolder = await Folder.findByIdAndDelete(req.params.id);
         if (!deletedFolder) return res.status(404).json({ message: 'Folder not found' });
