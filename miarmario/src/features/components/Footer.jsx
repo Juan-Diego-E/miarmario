@@ -2,16 +2,18 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer style={footerStyle}>
-            <div style={containerStyle}>
-                <p>&copy; {new Date().getFullYear()} mIArmario. Todos los derechos reservados.</p>
-                <nav>
-                    <a href="/about" style={linkStyle}>Acerca de</a>
-                    <a href="/privacy" style={linkStyle}>Privacidad</a>
-                    <a href="/contact" style={linkStyle}>Contacto</a>
-                </nav>
-            </div>
-        </footer>
+        <>
+        </>
+        // <footer style={footerStyle}>
+        //     <div style={containerStyle}>
+        //         <p>&copy; {new Date().getFullYear()} mIArmario. Todos los derechos reservados.</p>
+        //         <nav>
+        //             <a href="/about" style={linkStyle}>Acerca de</a>
+        //             <a href="/privacy" style={linkStyle}>Privacidad</a>
+        //             <a href="/contact" style={linkStyle}>Contacto</a>
+        //         </nav>
+        //     </div>
+        // </footer>
     );
 };
 
