@@ -3,19 +3,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
-import injectContext from './store/AppContext.js';
+import injectContext from './store/AppContext.jsx';
 
-// Lazy loading para las páginas
 const Home = React.lazy(() => import('./pages/Home.jsx'));
 const LogIn = React.lazy(() => import('./pages/LogIn.jsx'));
 const Register = React.lazy(() => import('./pages/Register.jsx'));
 const Profile = React.lazy(() => import('./pages/Profile.jsx'));
 
 const Layout = () => {
-    const basename = process.env.BASENAME || "";
+    const basename = import.meta.env.BASENAME || '';
     const [isOnline, setIsOnline] = useState(navigator.onLine);
 
-    // Maneja el cambio de estado de conexión
     useEffect(() => {
         const handleOnline = () => setIsOnline(true);
         const handleOffline = () => setIsOnline(false);
@@ -23,7 +21,6 @@ const Layout = () => {
         window.addEventListener('online', handleOnline);
         window.addEventListener('offline', handleOffline);
 
-        // Limpia los listeners cuando el componente se desmonta
         return () => {
             window.removeEventListener('online', handleOnline);
             window.removeEventListener('offline', handleOffline);
