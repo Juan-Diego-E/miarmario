@@ -3,10 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <>
-      <Layout />
-      <h1>Testing Front-End</h1>
-    </>
+    <Layout />
   );
 }
 
