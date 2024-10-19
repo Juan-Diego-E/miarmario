@@ -14,7 +14,7 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            <h1>Bienvenido a mIArmario</h1>
+            <h1>mIArmario</h1>
 
             {store.isAuthenticated ? (
                 <>

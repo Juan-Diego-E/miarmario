@@ -39,7 +39,7 @@ const Layout = () => {
     return (
         <BrowserRouter basename={basename}>
             <ScrollToTop />
-            <Navbar />
+            {/* <Navbar /> */}
 
             <Suspense fallback={<div>Cargando...</div>}>
                 <Routes>
@@ -51,7 +51,7 @@ const Layout = () => {
                 </Routes>
             </Suspense>
 
-            <Footer />
+            {/* <Footer /> */}
         </BrowserRouter>
     );
 };
