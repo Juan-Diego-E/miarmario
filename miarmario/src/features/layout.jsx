@@ -5,6 +5,8 @@ import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import injectContext from './store/AppContext.jsx';
 
+import Loader from './components/Loader.jsx';
+
 const Home = React.lazy(() => import('./pages/Home.jsx'));
 const LogIn = React.lazy(() => import('./pages/LogIn.jsx'));
 const Register = React.lazy(() => import('./pages/Register.jsx'));
@@ -41,7 +43,7 @@ const Layout = () => {
             <ScrollToTop />
             {/* <Navbar /> */}
 
-            <Suspense fallback={<div>Cargando...</div>}>
+            <Suspense fallback={<Loader />}>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<LogIn />} />
