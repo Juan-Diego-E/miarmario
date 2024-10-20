@@ -68,6 +68,8 @@ const AppProvider = ({ children }) => {
         }
     });
 
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         // Efecto para verificar si el usuario ya está autenticado al cargar la app
         const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -81,7 +83,8 @@ const AppProvider = ({ children }) => {
     }, []);
 
     return (
-        <AppContext.Provider value={{ store, actions }}>
+        <AppContext.Provider value={{ store, actions, isLoading, setIsLoading }}>
+            {isLoading && <Loader />}
             {children}
         </AppContext.Provider>
     );
