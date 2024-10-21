@@ -59,23 +59,24 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #706234;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* @media (prefers-color-scheme: dark) { */
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: light) { */
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #fcf6d8;
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #213547;
+    color: #fcf6d8;
   }
 }
