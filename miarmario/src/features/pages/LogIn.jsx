@@ -1,29 +1,17 @@
-import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../store/AppContext';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../../styles/components/LogIn.css'
 
 const LogIn = () => {
-    const { setIsLoading } = useContext(AppContext);
-    const [counter, setCounter] = React.useState(5);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            try {
-                counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchData();
-    }, [setIsLoading]);
-
     return (
         <>
-            <h1>Iniciar Sesión</h1>
-            <form action='login'>
+            <Link to="/">
+                <button className='home-icon'>
+                    <i className="fa-solid fa-house"></i>
+                </button>
+            </Link>
+            <h1 className='login-title'>Iniciar Sesión</h1>
+            <form action='login' className='login-form'>
                 <input
                     type="email"
                     name='email'
@@ -39,9 +27,7 @@ const LogIn = () => {
                 <button type="submit">Ingresar</button>
 
                 <p>Probar otro método</p>
-                <br />
                 <div className="o">------------------------ O ------------------------</div>
-                <br />
                 <button type="button">Ingresar con Google</button>
             </form>
         </>
