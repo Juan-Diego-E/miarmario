@@ -56,7 +56,7 @@ const Home = () => {
                     <h2>Por favor, inicia sesión para ver tu armario y outfits.</h2>
                     <p>¡Accede para comenzar a organizar tu armario de manera eficiente!</p>
                     <Link to="/login">
-                        <button>Iniciar Sesión</button>
+                        <button className='primary-button'>Iniciar Sesión</button>
                     </Link>
                 </>
 
