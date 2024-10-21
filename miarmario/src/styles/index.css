@@ -3,11 +3,12 @@
 :root {
   font-family: "Quicksand", serif, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 00;
 
   color-scheme: light dark;
-  color: #ffffffde;
-  background-color: #242424;
+  color: var(--color-white-b);
+  /* color: #ffffffde; */
+  background-color: var(--color-black);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,10 +19,12 @@
 
   --school-font: "Delius", cursive;
 
+  --color-black: #242424;
+  --color-white-b: #fffcf0;
+
 }
 
-*{
-  /* outline: 1px solid red; */
+* {
   margin: 0;
   padding: 0;
 }
@@ -31,6 +34,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -43,40 +47,117 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3rem;
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
+.primary-button {
+  border-radius: 22px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-white-b);
+  color: var(--color-black);
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+
+.primary-button:hover {
   border-color: #706234;
 }
-button:focus,
-button:focus-visible {
+
+.primary-button:focus,
+.primary-button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: dark) {
-/* @media (prefers-color-scheme: light) { */
+/* ------------------------My-Global-ones--------------------------- */
+
+/* Menú hamburg */
+.bars {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+
+.bars>.bar {
+  width: 100%;
+  height: 20%;
+  border-radius: 4px;
+}
+
+.bars>.bar:nth-child(2) {
+  background: #e0a26f;
+  margin: 4px 0;
+}
+
+.bars>.bar:first-child {
+  background: #eb806b;
+}
+
+.bars>.bar:last-child {
+  background: #fcf6d8;
+}
+
+/* Logo Título */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0.8rem 0 0.4rem 0;
+  border-bottom: 1px solid #88888885;
+}
+
+.logo-title {
+  color: var(--color-white-b);
+  font-family: var(--school-font);
+  font-size: 28px;
+}
+
+@media (prefers-color-scheme: dark) {}
+@media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #fcf6d8;
+    background-color: #fcfcfc;
   }
+
   a:hover {
     color: #747bff;
   }
-  button {
+
+  .primary-button {
     background-color: #213547;
-    color: #fcf6d8;
+    color: var(--color-white-b);
   }
+
+  /* Menú hamburg */
+  .bars>.bar:nth-child(2) {
+    background: #eb806b;
+    margin: 4px 0;
+  }
+
+  .bars>.bar:first-child {
+    background: #213547;
+  }
+
+  .bars>.bar:last-child {
+    background: #e0a26f;
+  }
+
+  /* Logo Título */
+  .logo-title {
+    color: var(--color-black);
+  }
+
+  /* ---------------------------------------- */
+
 }
