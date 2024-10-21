@@ -3,7 +3,9 @@ import './styles/App.css';
 
 function App() {
   return (
-    <Layout />
+    <div className="main-container">
+      <Layout />
+    </div>
   );
 }
 
