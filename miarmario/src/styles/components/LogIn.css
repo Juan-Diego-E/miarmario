@@ -43,14 +43,20 @@
     align-items: center;
     justify-content: center;
     gap: 0 10px;
-    color: #cfcfcf;
+    color: var(--c);
     font-weight: 600;
 }
 
 .login-form .o>div {
-    background-color: #cfcfcf;
+    background-color: var(--c);
     width: 50%;
     height: 1px;
+}
+
+.login-form .register-link {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
 }
 
 /* --------------Login-Icons--------------- */
@@ -113,6 +119,16 @@
 
 /* ----------Input-Validations------- */
 
+.password-alert {
+    visibility: hidden;
+    color: var(--c);
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.8rem;
+    left: 0;
+    transition: color 0.3s ease-in-out;
+}
+
 .login-form input:invalid:not(:placeholder-shown),
 .login-form input:valid:not(:placeholder-shown) {
     border-color: #ea4135b3;
@@ -122,12 +138,12 @@
 }
 .login-form input:invalid:not(:placeholder-shown)+.password-alert {
     color: #ea4135b3;
+    visibility: visible;
 }
 .login-form input:valid:not(:placeholder-shown)+.password-alert {
     color: #35a852b3;
 }
-.login-form input:invalid~button[type="submit"],
-.login-form .password-container > input:invalid~button[type="submit"]{
+.login-form input:invalid~button[type="submit"]{
     opacity: .6;
     pointer-events: none;
     cursor: none;
@@ -136,21 +152,13 @@
 .password-container {
     position: relative;
     display: flex;
-    align-items: center;
+    place-items: end;
+    height: 40px;
+    margin: 0.4rem 0 2rem;
 }
 
 .password {
     flex: 1;
-    margin-bottom: 3.3rem;
-}
-
-.password-alert {
-    color: var(--color-text-secondary);
-    position: absolute;
-    bottom: 24px;
-    font-size: 0.8rem;
-    left: 0;
-    transition: color 0.3s ease-in-out;
 }
 
 .toggle-password {
@@ -159,9 +167,9 @@
     cursor: pointer;
     position: absolute;
     right: 10px;
+    bottom: 10px;
     color: var(--color-text-secondary);
     font-size: 1.5rem;
-    margin-bottom: 2.6rem;
 }
 
 .toggle-password:focus {
@@ -175,10 +183,21 @@
         max-width: 600px;
     }
 }
-@media (width < 768px) and (height < 800px) {
+@media (width < 768px) and (height < 600px) {
     .login-title {
         font-size: 2rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0;
+    }
+
+    .login-form input {
+        padding: 0.4em 0 1em 0.2em;
+        border: none;
+        border-bottom: 2px solid var(--color-border);
+        font-size: 14px;
+    }
+
+    .login-form .register-link {
+        font-size: 0.8rem;
     }
 }
 
@@ -186,7 +205,10 @@
     .toggle-password {
         right: 8px;
         font-size: 1.2rem;
-        margin-bottom: 3rem;
+    }
+
+    .password-alert {
+        font-size: 0.7rem;
     }
 
     .login-title {
@@ -195,15 +217,16 @@
     }
 
     .login-form input {
-        padding: 0.6em 0 0.6em 0.2em;
-        border: none;
-        border-bottom: 2px solid var(--color-border);
         font-size: 14px;
     }
 
     .primary-button{
         padding: 0.5em 0;
         font-size: 0.8em;
+    }
+
+    .o + p{
+        font-size: 14px;
     }
 
     .login-btn {
