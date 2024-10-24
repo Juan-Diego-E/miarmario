@@ -13,6 +13,18 @@ const AppProvider = ({ children }) => {
         error: null,
     });
 
+    // Estado para manejar el tema
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    };
+
     const [actions] = useState({
         login: (userData) => {
             setStore(prevStore => ({
@@ -83,7 +95,7 @@ const AppProvider = ({ children }) => {
     }, []);
 
     return (
-        <AppContext.Provider value={{ store, actions, isLoading, setIsLoading }}>
+        <AppContext.Provider value={{ store, actions, isLoading, setIsLoading, theme, toggleTheme }}>
             {isLoading && <Loader />}
             {children}
         </AppContext.Provider>
