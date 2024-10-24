@@ -42,7 +42,7 @@ const LogIn = () => {
                         minLength='6'
                         required
                     />
-                <p className='password-alert'>La contraseña debe tener al menos 6 caracteres</p>
+                    <p className='password-alert'>La contraseña debe tener al menos 6 caracteres</p>
                     <button
                         type="button"
                         className="toggle-password"
@@ -58,9 +58,16 @@ const LogIn = () => {
 
                 <button className='primary-button' type="submit">Ingresar</button>
 
+                <div className='register-link'>
+                    <span>
+                        ¿Es tu primera vez por aquí?
+                    </span>
+                    <Link to='/register'>
+                        Registrarme
+                    </Link>
+                </div>
                 <div className="o"><div></div> O <div></div></div>
                 <p>Probar otro método</p>
-                <br />
                 <div className='login-options'>
                     <button onClick={(e) => Soon()} className='login-btn' type="button">
                         <i className="fa-brands fa-google"></i>
