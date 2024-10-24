@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Delius&family=Quicksand:wght@300..700&display=swap');
+
+:root {
+    font-family: "Quicksand", serif, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 00;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+    
+    --logo-font: "Delius", cursive;
+
+    --a: #fffcf0;
+    --b: #242424;
+    --c: #88888885;
+    --d: #4b4b4b;
+
+    --e1: #fffcf0;
+    --e2: #556b92;
+    --btn: #fffcf0;
+
+    --hover-effect: brightness(1.4);
+
+    --color-bg: var(--b);
+    --color-text-primary: var(--a);
+    --color-bg-btn-primary: var(--btn);
+    --color-text-btn-primary: var(--b);
+    --color-text-secondary: var(--d);
+
+    --color-border: var(--e1);
+    --color-border-focus: var(--e2);
+
+    --bar-1: #eb806b;
+    --bar-2: #e0a26f;
+    --bar-3: #fcf6d8;
+
+    --google: #f3f3f3;
+}
+
+[data-theme="light"] {
+    --a: #242424;
+    --b: #fffcf0;
+    --d: #4b4b4b;
+
+    --e1: #213547;
+    --e2: #556b92;
+
+    --btn: #213547;
+
+    --hover-effect: brightness(1.4);
+
+    --bar-1: #213547;
+    --bar-2: #eb806b;
+    --bar-3: #e0a26f;
+
+    --google: #556b92;
+}
+
+[data-theme="dark"] {
+    --a: #fffcf0;
+    --b: #242424;
+    --d: #fffcf0dc;
+    
+    --e1: #fffcf0;
+    --e2: #e0a26f;
+
+    --btn: #fffcf0;
+
+    --hover-effect: opacity(1.4);
+
+    --bar-1: #eb806b;
+    --bar-2: #e0a26f;
+    --bar-3: #fcf6d8;
+
+    --google: #f3f3f3;
+}
